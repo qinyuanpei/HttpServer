@@ -1,0 +1,5 @@
+D:\项目管理\CSharp\HTTPServer\HttpServerLib\bin\Debug\HttpServerLib.dll
+D:\项目管理\CSharp\HTTPServer\HttpServerLib\bin\Debug\HttpServerLib.pdb
+D:\项目管理\CSharp\HTTPServer\HttpServerLib\obj\Debug\HttpServerLib.dll
+D:\项目管理\CSharp\HTTPServer\HttpServerLib\obj\Debug\HttpServerLib.pdb
+D:\项目管理\CSharp\HTTPServer\HttpServerLib\obj\Debug\HttpServerLib.csprojResolveAssemblyReference.cache
