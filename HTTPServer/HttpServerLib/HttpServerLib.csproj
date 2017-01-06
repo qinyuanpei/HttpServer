@@ -45,10 +45,6 @@
     <Compile Include="HttpServer.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TcpServer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="HttpServerLib.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,8 +12,8 @@ namespace HTTPServer
     {
         static void Main(string[] args)
         {
-            ExampleServer server = new ExampleServer("127.0.0.1",4050);
-            server.SetServerRoot("D:\\Hexo\\public");
+            ExampleServer server = new ExampleServer("0.0.0.0",4050);
+            server.SetServerRoot("./");
             server.Start();
         }
     }
