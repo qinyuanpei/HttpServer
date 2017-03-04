@@ -94,12 +94,15 @@ namespace HttpServer
             string contentType = GetContentType(extension);
 
             //如果文件不存在则返回404否则读取文件内容
-            if(!File.Exists(fileName)){
+            if(!File.Exists(fileName))
+            {
                 response = new HttpResponse("<html><body><h1>404 - Not Found</h1></body></html>", Encoding.UTF8);
                 response.StatusCode = "404";
                 response.Content_Type = "text/html";
                 response.Server = "ExampleServer";
-            }else{
+            }
+            else
+            {
                 response = new HttpResponse(File.ReadAllBytes(fileName), Encoding.UTF8);
                 response.StatusCode = "200";
                 response.Content_Type = contentType;
