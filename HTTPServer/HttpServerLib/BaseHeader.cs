@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HttpServerLib
+namespace HTTPServerLib
 {
      /// <summary>
      /// HTTP公共头部定义
