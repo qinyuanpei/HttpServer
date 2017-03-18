@@ -149,7 +149,7 @@ namespace HttpServer
             //构造HTML
             StringBuilder builder = new StringBuilder();
             builder.Append(string.Format("<html><head><title>{0}</title></head>", requestDirectory));
-            builder.Append(string.Format("<body><h1>{0}[目录]</h1><h2>文件列表</h2><hr/><ul>{1}</ul><br/><h2>目录列表</h2><hr/><ul>{2}</ul></body></html>",
+            builder.Append(string.Format("<body><h1>{0}</h1><br/><ul>{1}{2}</ul></body></html>",
                  requestURL, filesList, foldersList));
 
             return builder.ToString();

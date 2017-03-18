@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HTTPServerLib
 {
     [AttributeUsage(AttributeTargets.Method)]
-    class RouteMapAttribute:Attribute
+    class RouteAttribute:Attribute
     {
         public RouteMethod Method { get; set; }
         public string RoutePath { get; set; }

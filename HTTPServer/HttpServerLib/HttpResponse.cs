@@ -121,18 +121,6 @@ namespace HTTPServerLib
         }
 
         /// <summary>
-        /// 设置响应内容
-        /// </summary>
-        /// <typeparam name="TValue">泛型类型</typeparam>
-        /// <param name="content">泛型类型实例</param>
-        /// <param name="encoding">内容编码</param>
-        /// <returns></returns>
-        public HttpResponse SetContent<TValue>(TValue content, Encoding encoding = null) where TValue : new()
-        {
-            return this;
-        }
-
-        /// <summary>
         /// 构建响应头部
         /// </summary>
         /// <returns></returns>

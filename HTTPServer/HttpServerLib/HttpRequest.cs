@@ -148,18 +148,22 @@ namespace HTTPServerLib
             //获取请求方法
             var firstLine = lines[0].Split(' ');
 
-            if (firstLine.Length > 0){
+            if (firstLine.Length > 0)
+            {
                 this.Method = firstLine[0];
             }
 
-            if (firstLine.Length > 1){
+            if (firstLine.Length > 1)
+            {
                 this.URL = Uri.UnescapeDataString(firstLine[1]);
             }
 
             //获取请求参数
-            if (this.Method == "GET" && this.URL.Contains('?')){
+            if (this.Method == "GET" && this.URL.Contains('?'))
+            {
                 this.Params = GetRequestParams(URL.Split('?')[1]);
-            }else if (this.Method == "POST"){
+            } else if (this.Method == "POST")
+            {
                 this.Params = GetRequestParams(lines[lines.Length - 1]);
             }
 
@@ -213,6 +217,11 @@ namespace HTTPServerLib
         public string BuildHeader()
         {
             return this.content;
+        }
+
+        public TValue From<TValue>() where TValue : new()
+        {
+            return default(TValue);
         }
     }
 }
