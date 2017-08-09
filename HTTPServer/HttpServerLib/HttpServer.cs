@@ -124,17 +124,14 @@ namespace HTTPServerLib
         /// </summary>
         public void Start()
         {
-            if (IsRunning)
-            {
-                return;
-            }
+            if (IsRunning) return;
 
             //创建服务端Socket
             this.serverListener = new TcpListener(IPAddress.Parse(ServerIP), ServerPort);
             this.Protocol = serverCertificate == null ? Protocols.Http : Protocols.Http;
             this.IsRunning = true;
-            this.Log(string.Format("Sever is running at {0}://{1}:{2}", Protocol.ToString().ToLower(), ServerIP, ServerPort));
             this.serverListener.Start();
+            this.Log(string.Format("Sever is running at {0}://{1}:{2}", Protocol.ToString().ToLower(), ServerIP, ServerPort));
 
             try
             {
@@ -166,6 +163,8 @@ namespace HTTPServerLib
 
         public void Stop()
         {
+            if (!IsRunning) return;
+
             IsRunning = false;
             serverListener.Stop();
         }
@@ -218,7 +217,7 @@ namespace HTTPServerLib
             //处理SSL
             if (serverCertificate != null) clientStream = ProcessSSL(clientStream);
             if (clientStream == null) return;
-            
+
             //构造HTTP请求
             HttpRequest request = new HttpRequest(clientStream);
             request.Logger = Logger;
@@ -258,13 +257,6 @@ namespace HTTPServerLib
                 sslStream.WriteTimeout = 10000;
                 return sslStream;
             }
-            catch (AuthenticationException e)
-            {
-                Log(e.Message);
-                if (e.InnerException != null) Log(e.InnerException.Message);
-                Log("Authentication failed - closing the connection: " + e.Message);
-                clientStream.Close();
-            }
             catch (Exception e)
             {
                 Log(e.Message);
@@ -275,95 +267,33 @@ namespace HTTPServerLib
         }
 
         /// <summary>
-        /// 根据文件扩展名获取内容类型
-        /// </summary>
-        /// <param name="extension">文件扩展名</param>
-        /// <returns></returns>
-        protected string GetContentType(string extension)
-        {
-            string reval = string.Empty;
-
-            if (string.IsNullOrEmpty(extension))
-                return null;
-
-            switch (extension)
-            {
-                case ".htm":
-                    reval = "text/html";
-                    break;
-                case ".html":
-                    reval = "text/html";
-                    break;
-                case ".txt":
-                    reval = "text/plain";
-                    break;
-                case ".css":
-                    reval = "text/css";
-                    break;
-                case ".png":
-                    reval = "image/png";
-                    break;
-                case ".gif":
-                    reval = "image/gif";
-                    break;
-                case ".jpg":
-                    reval = "image/jpg";
-                    break;
-                case ".jpeg":
-                    reval = "image/jgeg";
-                    break;
-                case ".zip":
-                    reval = "application/zip";
-                    break;
-            }
-            return reval;
-        }
-
-        /// <summary>
-        /// 根据物理路径获取MIME文件二进制流,并填写文件类型
-        /// </summary>
-        /// <param name="filePath">文件物理路径</param>
-        /// <param name="response">响应对象</param>
-        /// <returns></returns>
-        public byte[] GetFile(string filePath,HttpResponse response)
-        {
-            try
-            {
-                response.Content_Type = GetMimeFromFile(filePath);
-                return System.IO.File.ReadAllBytes(filePath);
-            }
-            catch
-            {
-                Console.WriteLine("请求该物理地址错误:{0}", filePath);
-                return System.Text.Encoding.UTF8.GetBytes("<html><head></head><body>服务器 <br/> 输出错误 <br/> :(</body></html>");
-            }
-        }
-
-        /// <summary>
         /// 获取文件MIME类型，并检测文件是否存在
         /// </summary>
         /// <param name="filePath">文件物理路径</param>
         /// <returns></returns>
-        public static string GetMimeFromFile(string filePath)
+        protected string GetMimeFromFile(string filePath)
         {
             IntPtr mimeout;
-            if (!System.IO.File.Exists(filePath))
-                throw new FileNotFoundException(filePath + " 未找到");
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException(string.Format("File {0} can't be found at server.", filePath));
 
             int MaxContent = (int)new FileInfo(filePath).Length;
             if (MaxContent > 4096) MaxContent = 4096;
-            FileStream fs = File.OpenRead(filePath);
-
             byte[] buf = new byte[MaxContent];
-            fs.Read(buf, 0, MaxContent);
-            fs.Close();
-            int result = FindMimeFromData(IntPtr.Zero, filePath, buf, MaxContent, null, 0, out mimeout, 0);
 
+            using (FileStream fs = File.OpenRead(filePath))
+            {
+                fs.Read(buf, 0, MaxContent);
+                fs.Close();
+            }
+
+            int result = FindMimeFromData(IntPtr.Zero, filePath, buf, MaxContent, null, 0, out mimeout, 0);
             if (result != 0)
                 throw Marshal.GetExceptionForHR(result);
+
             string mime = Marshal.PtrToStringUni(mimeout);
             Marshal.FreeCoTaskMem(mimeout);
-            
+
             return mime;
         }
 

@@ -135,7 +135,7 @@ namespace HTTPServerLib
                 builder.Append("Age:" + Age + "\r\n");
 
             if (!string.IsNullOrEmpty(Server))
-                builder.Append("Sever:" + Server + "\r\n");
+                builder.Append("Server:" + Server + "\r\n");
 
             if (!string.IsNullOrEmpty(Accept_Ranges))
                 builder.Append("Accept-Ranges:" + Accept_Ranges + "\r\n");
