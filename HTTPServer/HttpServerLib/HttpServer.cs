@@ -329,7 +329,7 @@ namespace HTTPServerLib
         {
             try
             {
-                response.Content_Type = getMimeFromFile(filePath);
+                response.Content_Type = GetMimeFromFile(filePath);
                 return System.IO.File.ReadAllBytes(filePath);
             }
             catch
@@ -344,7 +344,7 @@ namespace HTTPServerLib
         /// </summary>
         /// <param name="filePath">文件物理路径</param>
         /// <returns></returns>
-        public static string getMimeFromFile(string filePath)
+        public static string GetMimeFromFile(string filePath)
         {
             IntPtr mimeout;
             if (!System.IO.File.Exists(filePath))
