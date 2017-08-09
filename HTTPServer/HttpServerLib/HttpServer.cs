@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace HTTPServerLib
 {
@@ -181,6 +182,13 @@ namespace HTTPServerLib
             this.ServerRoot = root;
             return this;
         }
+        /// <summary>
+        /// 获取服务器目录
+        /// </summary>
+        public string GetRoot()
+        {
+            return this.ServerRoot;
+        }
 
         /// <summary>
         /// 设置端口
@@ -310,6 +318,66 @@ namespace HTTPServerLib
             }
             return reval;
         }
+
+        /// <summary>
+        /// 根据物理路径获取MIME文件二进制流,并填写文件类型
+        /// </summary>
+        /// <param name="filePath">文件物理路径</param>
+        /// <param name="response">响应对象</param>
+        /// <returns></returns>
+        public byte[] GetFile(string filePath,HttpResponse response)
+        {
+            try
+            {
+                response.Content_Type = getMimeFromFile(filePath);
+                return System.IO.File.ReadAllBytes(filePath);
+            }
+            catch
+            {
+                Console.WriteLine("请求该物理地址错误:{0}", filePath);
+                return System.Text.Encoding.UTF8.GetBytes("<html><head></head><body>服务器 <br/> 输出错误 <br/> :(</body></html>");
+            }
+        }
+
+        /// <summary>
+        /// 获取文件MIME类型，并检测文件是否存在
+        /// </summary>
+        /// <param name="filePath">文件物理路径</param>
+        /// <returns></returns>
+        public static string getMimeFromFile(string filePath)
+        {
+            IntPtr mimeout;
+            if (!System.IO.File.Exists(filePath))
+                throw new FileNotFoundException(filePath + " 未找到");
+
+            int MaxContent = (int)new FileInfo(filePath).Length;
+            if (MaxContent > 4096) MaxContent = 4096;
+            FileStream fs = File.OpenRead(filePath);
+
+            byte[] buf = new byte[MaxContent];
+            fs.Read(buf, 0, MaxContent);
+            fs.Close();
+            int result = FindMimeFromData(IntPtr.Zero, filePath, buf, MaxContent, null, 0, out mimeout, 0);
+
+            if (result != 0)
+                throw Marshal.GetExceptionForHR(result);
+            string mime = Marshal.PtrToStringUni(mimeout);
+            Marshal.FreeCoTaskMem(mimeout);
+            
+            return mime;
+        }
+
+        [DllImport("urlmon.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = false)]
+        static extern int FindMimeFromData(IntPtr pBC,
+              [MarshalAs(UnmanagedType.LPWStr)] string pwzUrl,
+              [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I1, SizeParamIndex = 3)] 
+              byte[] pBuffer,
+              int cbSize,
+              [MarshalAs(UnmanagedType.LPWStr)]  
+              string pwzMimeProposed,
+              int dwMimeFlags,
+              out IntPtr ppwzMimeOut,
+              int dwReserved);
 
         /// <summary>
         /// 记录日志
