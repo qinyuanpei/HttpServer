@@ -136,9 +136,9 @@ namespace HTTPServerLib
             do
             {
                 //缓存客户端请求报文
-                length = handler.Read(bytes, 0, MAX_SIZE - 1);
+                length = handler.Read(bytes, 0, MAX_SIZE);
                 content += Encoding.UTF8.GetString(bytes, 0, length);
-            } while (length > 0 && !content.Contains("\r\n\r\n"));
+            } while (length > 0);
 
             if (string.IsNullOrEmpty(content)) return;
 
