@@ -267,49 +267,6 @@ namespace HTTPServerLib
         }
 
         /// <summary>
-        /// 获取文件MIME类型，并检测文件是否存在
-        /// </summary>
-        /// <param name="filePath">文件物理路径</param>
-        /// <returns></returns>
-        protected string GetMimeFromFile(string filePath)
-        {
-            IntPtr mimeout;
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException(string.Format("File {0} can't be found at server.", filePath));
-
-            int MaxContent = (int)new FileInfo(filePath).Length;
-            if (MaxContent > 4096) MaxContent = 4096;
-            byte[] buf = new byte[MaxContent];
-
-            using (FileStream fs = File.OpenRead(filePath))
-            {
-                fs.Read(buf, 0, MaxContent);
-                fs.Close();
-            }
-
-            int result = FindMimeFromData(IntPtr.Zero, filePath, buf, MaxContent, null, 0, out mimeout, 0);
-            if (result != 0)
-                throw Marshal.GetExceptionForHR(result);
-
-            string mime = Marshal.PtrToStringUni(mimeout);
-            Marshal.FreeCoTaskMem(mimeout);
-
-            return mime;
-        }
-
-        [DllImport("urlmon.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = false)]
-        static extern int FindMimeFromData(IntPtr pBC,
-              [MarshalAs(UnmanagedType.LPWStr)] string pwzUrl,
-              [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I1, SizeParamIndex = 3)] 
-              byte[] pBuffer,
-              int cbSize,
-              [MarshalAs(UnmanagedType.LPWStr)]  
-              string pwzMimeProposed,
-              int dwMimeFlags,
-              out IntPtr ppwzMimeOut,
-              int dwReserved);
-
-        /// <summary>
         /// 记录日志
         /// </summary>
         /// <param name="message">日志消息</param>

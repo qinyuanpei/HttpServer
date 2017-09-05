@@ -61,7 +61,7 @@ namespace HttpServer
             if (extension != "")
             {
                 //从文件中返回HTTP响应
-                response = LoadFromFile(response, requestFile);
+                response = response.FromFile(requestFile);
             } 
             else
             {
@@ -77,7 +77,7 @@ namespace HttpServer
                 {
                     //加载静态HTML页面
                     requestFile = Path.Combine(requestFile, "index.html");
-                    response = LoadFromFile(response, requestFile);
+                    response = response.FromFile(requestFile);
                     response.Content_Type = "text/html; charset=UTF-8";
                 }
             }
@@ -89,37 +89,6 @@ namespace HttpServer
         public override void OnDefault(HttpRequest request, HttpResponse response)
         {
 
-        }
-
-        /// <summary>
-        /// 从文件返回一个HTTP响应
-        /// </summary>
-        /// <param name="fileName">文件名</param>
-        private HttpResponse LoadFromFile(HttpResponse response, string fileName)
-        {
-            //获取文件扩展名以判断内容类型
-            string extension = Path.GetExtension(fileName);
-
-            //获取当前内容类型
-            string contentType = GetContentType(extension);
-
-            //如果文件不存在则返回404否则读取文件内容
-            if (!File.Exists(fileName))
-            {
-                response.SetContent("<html><body><h1>404 - Not Found</h1></body></html>");
-                response.StatusCode = "404";
-                response.Content_Type = "text/html";
-                response.Server = "ExampleServer";
-            } else
-            {
-                response.SetContent(File.ReadAllBytes(fileName));
-                response.StatusCode = "200";
-                response.Content_Type = contentType;
-                response.Server = "ExampleServer";
-            }
-
-            //返回数据
-            return response;
         }
 
         private string ConvertPath(string[] urls)
