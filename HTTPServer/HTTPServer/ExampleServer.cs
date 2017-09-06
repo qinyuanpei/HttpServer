@@ -31,9 +31,9 @@ namespace HttpServer
 
             //构造响应报文
             response.SetContent(content);
-            response.Content_Encoding = "utf-8";
+            response.ContentEncoding = "utf-8";
             response.StatusCode = "200";
-            response.Content_Type = "text/html; charset=UTF-8";
+            response.ContentType = "text/html; charset=UTF-8";
             response.Server = "ExampleServer";
 
             //发送响应
@@ -71,14 +71,14 @@ namespace HttpServer
                     requestFile = Path.Combine(ServerRoot, requestFile);
                     var content = ListDirectory(requestFile, requestURL);
                     response = response.SetContent(content, Encoding.UTF8);
-                    response.Content_Type = "text/html; charset=UTF-8";
+                    response.ContentType = "text/html; charset=UTF-8";
                 } 
                 else
                 {
                     //加载静态HTML页面
                     requestFile = Path.Combine(requestFile, "index.html");
                     response = response.FromFile(requestFile);
-                    response.Content_Type = "text/html; charset=UTF-8";
+                    response.ContentType = "text/html; charset=UTF-8";
                 }
             }
 
