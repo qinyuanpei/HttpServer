@@ -16,14 +16,14 @@ namespace HTTPServerLib
             {
                 response.SetContent("<html><body><h1>404 - Not Found</h1></body></html>");
                 response.StatusCode = "404";
-                response.Content_Type = "text/html";
+                response.ContentType = "text/html";
                 return response;
             }
 
             var content = File.ReadAllBytes(fileName);
             var contentType = GetMimeFromFile(fileName);
             response.SetContent(content);
-            response.Content_Type = contentType;
+            response.ContentType = contentType;
             response.StatusCode = "200";
             return response;
         }
@@ -31,7 +31,7 @@ namespace HTTPServerLib
         public static HttpResponse FromXML(this HttpResponse response, string xmlText)
         {
             response.SetContent(xmlText);
-            response.Content_Type = "text/xml";
+            response.ContentType = "text/xml";
             response.StatusCode = "200";
             return response;
         }
@@ -44,7 +44,7 @@ namespace HTTPServerLib
         public static HttpResponse FromJSON(this HttpResponse response, string jsonText)
         {
             response.SetContent(jsonText);
-            response.Content_Type = "text/json";
+            response.ContentType = "text/json";
             response.StatusCode = "200";
             return response;
         }
@@ -57,7 +57,7 @@ namespace HTTPServerLib
         public static HttpResponse FromText(this HttpResponse response, string text)
         {
             response.SetContent(text);
-            response.Content_Type = "text/plain";
+            response.ContentType = "text/plain";
             response.StatusCode = "200";
             return response;
         }
