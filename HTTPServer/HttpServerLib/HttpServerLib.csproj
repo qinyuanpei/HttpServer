@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ActionResult.cs" />
     <Compile Include="BaseHeader.cs" />
+    <Compile Include="HeaderFields.cs" />
     <Compile Include="HttpRequest.cs" />
     <Compile Include="HttpResponse.cs" />
     <Compile Include="HttpServer.cs" />
