@@ -6,184 +6,81 @@ using System.Threading.Tasks;
 
 namespace HTTPServerLib
 {
-     /// <summary>
-     /// HTTP公共头部定义
-     /// </summary>
      public class BaseHeader
     {
-        /*-------------------------------------------------------------*/
-        /*------------------以下通用头部参数定义 ----------------------*/
-        /*-------------------------------------------------------------*/
+         /// <summary>
+         /// HTTP(S)地址
+         /// </summary>
+         public string URL { get; set; }
 
          /// <summary>
-         /// Cache-Control字段
+         /// 编码格式
          /// </summary>
-         public string Cache_Control { get; set; }
+         public Encoding Encoding { get; set; }
 
          /// <summary>
-         /// Pragma字段
+         /// HTTP状态码
          /// </summary>
-         public string Pragma { get; set; }
+         public string StatusCode { get; set; }
 
          /// <summary>
-         /// Connection字段
+         /// HTTP协议版本
          /// </summary>
-         public string Connection { get; set; }
+         public string ProtocolVersion { get; set; }
 
          /// <summary>
-         /// Date字段
+         /// HTTP头部字段
          /// </summary>
-         public string Date { get; set; }
+         public Dictionary<string, string> Headers { get; set; }
 
          /// <summary>
-         /// Transfer-Encoding字段
+         /// HTTP消息体
          /// </summary>
-         public string Transfer_Encoding { get; set; }
+         public string Body { get; set; }
 
          /// <summary>
-         /// Upgrade字段
+         /// ContentType
          /// </summary>
-         public string Upgrade { get; set; }
+         public string ContentType { get; set; }
 
          /// <summary>
-         /// Via字段
+         /// ContentLength
          /// </summary>
-         public string Via { get; set; }
-
-         /*-------------------------------------------------------------*/
-         /*------------------以下为实体头部参数定义 --------------------*/
-         /*-------------------------------------------------------------*/
+         public long ContentLength { get; set; }
 
          /// <summary>
-         /// Allow字段
+         /// ContentEncoding
          /// </summary>
-         public string Allow { get; set; }
+         public string ContentEncoding { get; set; }
 
          /// <summary>
-         /// Location字段
+         /// CharacterSet
          /// </summary>
-         public string Location { get; set; }
+         public string CharacterSet { get; set; }
 
          /// <summary>
-         /// Content_Base字段
+         /// 设置HTTP头部字段
          /// </summary>
-         public string Content_Base { get; set; }
+         /// <param name="field">字段名</param>
+         /// <param name="value">字段值</param>
+         public void SetHeaders(HeaderFields field, string value)
+         {
+
+         }
 
          /// <summary>
-         /// Content_Encoding字段 
+         /// 获取HTTP头部字段
          /// </summary>
-         public string Content_Encoding {get;set;}
-
-         /// <summary>
-         /// Content_Language字段
-         /// </summary>
-         public string Content_Language { get; set; }
-
-         /// <summary>
-         /// Content_Length字段
-         /// </summary>
-         public string Content_Length { get; set; }
-
-         /// <summary>
-         /// Content_Location字段
-         /// </summary>
-         public string Content_Location { get; set; }
-
-         /// <summary>
-         /// Content_MD5字段
-         /// </summary>
-         public string Content_MD5 { get; set; }
-
-         /// <summary>
-         /// Content_Range字段
-         /// </summary>
-         public string Content_Range { get; set; }
-
-         /// <summary>
-         /// Content_Type字段
-         /// </summary>
-         public string Content_Type { get; set; }
-
-         /// <summary>
-         /// Etag字段
-         /// </summary>
-         public string Etag { get; set; }
-
-         /// <summary>
-         /// Expires字段
-         /// </summary>
-         public string Expires { get; set; }
-
-         /// <summary>
-         /// Last_Modified字段
-         /// </summary>
-         public string Last_Modified { get; set; }
+         /// <param name="field">字段名</param>
+         /// <returns></returns>
+         public string GetHeaders(HeaderFields field)
+         {
+             return null;
+         }
 
 
-         /*-------------------------------------------------------------*/
-         /*------------------以下为报文解析公共方法 --------------------*/
-         /*-------------------------------------------------------------*/
 
-
-        /// <summary>
-        /// 根据键名从键值对中获取值
-        /// </summary>
-        /// <param name="content">报文内容</param>
-        /// <param name="key">键名</param>
-        /// <returns>键名存在则返回值否则返回空字符</returns>
-        protected string GetKeyValueByKey(string content, string key)
-        {
-            //防御编程
-            if(string.IsNullOrEmpty(content) || string.IsNullOrEmpty(key))
-                return "";
-
-            //按照换行符对报文内容进行分割
-            string[] AllLines = content.Split('\n');
-
-            //根据键名来匹配指定行报文
-            var line = AllLines.Where(item => item.Split(':')[0] == key);
-
-            //如果键名不存在则返回null
-            if (line == null || line.Count() <= 0)
-                return null;
-
-            //如果值不存在则返回null
-            string[] reval = line.First<string>().Split(':');
-            if (reval.Length <= 1)
-                return null;
-
-            return reval[1];
-        }
-
-        /// <summary>
-        /// 根据键名从键值对中获取值数组
-        /// </summary>
-        /// <param name="content">报文内容</param>
-        /// <param name="key">键名</param>
-        /// <returns>键名存在则返回值否则返回null</returns>
-        protected string[] GetKeyValueArrayByKey(string content, string key)
-        {
-            //防御编程
-            if(string.IsNullOrEmpty(content) || string.IsNullOrEmpty(key))
-                return null;
-
-            //按照换行符对报文内容进行分割
-            string[] AllLines = content.Split('\n');
-
-            //根据键名来匹配指定行报文
-            var line = AllLines.Where(item => item.Split(':')[0] == key);
-
-            //如果键名不存在则返回null
-            if (line == null || line.Count() <= 0)
-                return null;
-
-            //如果值不存在则返回null
-            string[] reval = line.First<string>().Split(':');
-            if (reval.Length <= 1)
-                return null;
-
-            return reval[1].Split(',');
-        }
+       
 
         /// <summary>
         /// 从内容中解析请求参数并返回一个字典
