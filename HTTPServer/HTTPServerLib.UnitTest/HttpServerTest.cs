@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
 using System.Text;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace HTTPServerLib.UnitTest
 {
@@ -29,14 +32,11 @@ namespace HTTPServerLib.UnitTest
             var response = request.GetResponse();
             Assert.AreEqual("text/html; charset=UTF-8", response.Headers["Content-Type"]);
             Assert.AreEqual("ExampleServer", response.Headers["Server"]);
-
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
             {
                 var content = reader.ReadToEnd();
                 Assert.AreEqual("这是通过Post方式返回的数据:a=10;b=15", content);
             }
         }
-
-
     }
 }

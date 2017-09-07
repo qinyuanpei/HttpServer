@@ -9,10 +9,13 @@ namespace HTTPServerLib
 {
     public class HttpResponse : BaseHeader
     {
-        public string Server { get; set; }
-        public byte[] Content { get; private set; }
+        public string StatusCode { get; set; }
 
-        public Encoding Encoding { get; private set; }
+        public string Protocols { get; set; }
+
+        public string ProtocolsVersion { get; set; }
+
+        public byte[] Content { get; private set; }
 
         private Stream handler;
 
@@ -23,25 +26,14 @@ namespace HTTPServerLib
             this.handler = stream;
         }
 
-        /// <summary>
-        /// 设置响应内容
-        /// </summary>
-        /// <param name="content">响应内容</param>
-        /// <param name="encoding">内容编码</param>
         public HttpResponse SetContent(byte[] content, Encoding encoding = null)
         {
-            //初始化内容
             this.Content = content;
             this.Encoding = encoding != null ? encoding : Encoding.UTF8;
-            this.ContentLength = long.Parse(content.Length.ToString());
+            this.Content_Length = content.Length.ToString();
             return this;
         }
 
-        /// <summary>
-        /// 设置响应内容
-        /// </summary>
-        /// <param name="content">响应内容</param>
-        /// <param name="encoding">内容编码</param>
         public HttpResponse SetContent(string content, Encoding encoding = null)
         {
             //初始化内容
@@ -52,6 +44,16 @@ namespace HTTPServerLib
         public Stream GetResponseStream()
         {
             return this.handler;
+        }
+
+        public string GetHeader(ResponseHeaders header)
+        {
+            return GetHeader<ResponseHeaders>(header);
+        }
+
+        public void SetHeader(ResponseHeaders header, string value)
+        {
+            SetHeader<ResponseHeaders>(header, value);
         }
 
         /// <summary>
@@ -65,10 +67,8 @@ namespace HTTPServerLib
             if (!string.IsNullOrEmpty(StatusCode))
                 builder.Append("HTTP/1.1 " + StatusCode + "\r\n");
 
-            if (!string.IsNullOrEmpty(this.ContentType))
-                builder.AppendLine("Content-Type:" + this.ContentType);
-            if (this.ContentLength > 0)
-                builder.AppendLine("ContentLength:" + this.ContentLength);
+            if (!string.IsNullOrEmpty(this.Content_Type))
+                builder.AppendLine("Content-Type:" + this.Content_Type);
             return builder.ToString();
         }
 
