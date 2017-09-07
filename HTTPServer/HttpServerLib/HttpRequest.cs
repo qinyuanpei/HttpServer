@@ -25,6 +25,16 @@ namespace HTTPServerLib
         public string Method { get; private set; }
 
         /// <summary>
+        /// HTTP(S)地址
+        /// </summary>
+        public string URL { get; set; }
+
+        /// <summary>
+        /// HTTP协议版本
+        /// </summary>
+        public string ProtocolVersion { get; set; }
+
+        /// <summary>
         /// 定义缓冲区
         /// </summary>
         private const int MAX_SIZE = 1024 * 1024 * 2;
@@ -46,25 +56,35 @@ namespace HTTPServerLib
             if (first.Length > 0) this.Method = first[0];
             if (first.Length > 1) this.URL = Uri.UnescapeDataString(first[1]);
 
-            //Request Params
+            //Request Headers
+            this.Headers = GetRequestHeaders(rows);
+
+            //Request "GET"
             if (this.Method == "GET" && this.URL.Contains('?'))
             {
-                this.Params = GetRequestParams(URL.Split('?')[1]);
+                this.Params = GetRequestParameters(URL.Split('?')[1]);
             }
 
-            //Request Body
+            //Request "POST"
             if (this.Method == "POST")
             {
                 this.Body = GetRequestBody(rows);
             }
-
-            //Request Headers
-            this.Headers = GetRequestHeaders(rows);
         }
 
         public Stream GetRequestStream()
         {
             return this.handler;
+        }
+
+        public string GetHeader(RequestHeaders header)
+        {
+            return GetHeader<RequestHeaders>(header);
+        }
+
+        public void SetHeader(RequestHeaders header,string value)
+        {
+            SetHeader<RequestHeaders>(header, value);
         }
 
         private string GetRequestData(Stream stream)
@@ -93,10 +113,18 @@ namespace HTTPServerLib
         {
             if (rows == null || rows.Count() <= 0) return null;
             var target = rows.Select((v, i) => new { Value = v, Index = i }).FirstOrDefault(e => e.Value.Trim() == string.Empty);
-            var index = target == null ? rows.Count() - 1 : target.Index;
-            if (index <= 1) return null;
-            var range = Enumerable.Range(1, index - 1);
-            return range.Select(e => rows.ElementAt(e)).ToDictionary(e => e.Split(':')[0], e => e.Split(':')[1]);
+            var length = target == null ? rows.Count() - 1 : target.Index;
+            if (length <= 1) return null;
+            var range = Enumerable.Range(1, length - 1);
+            return range.Select(e => rows.ElementAt(e)).ToDictionary(e => e.Split(':')[0], e => e.Split(':')[1].Trim());
+        }
+
+        private Dictionary<string, string> GetRequestParameters(string row)
+        {
+            if (string.IsNullOrEmpty(row)) return null;
+            var kvs = Regex.Split(row, "&");
+            if (kvs == null || kvs.Count() <= 0) return null;
+            return kvs.ToDictionary(e => Regex.Split(e, "==")[0], e => Regex.Split(e, "==")[1]);
         }
     }
 }
