@@ -18,7 +18,7 @@ namespace HTTPServerLib
 
         public string Content_Encoding { get; set; }
 
-        public string Content_Language { get; set; }
+        public string ContentLanguage { get; set; }
 
         public Dictionary<string, string> Headers { get; set; }
 

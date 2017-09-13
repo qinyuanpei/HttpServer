@@ -15,9 +15,9 @@ namespace HTTPServerLib
             var memberName = Enum.GetName(valueType, value);
             if (memberName == null) return null;
             var fieldInfo = valueType.GetField(memberName);
-            var attribute = Attribute.GetCustomAttribute(fieldInfo,typeof(DescriptionAttribute));
+            var attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute));
             if (attribute == null) return null;
-            return ((DescriptionAttribute)attribute).Description;
+            return (attribute as DescriptionAttribute).Description;
         }
     }
-} 
+}

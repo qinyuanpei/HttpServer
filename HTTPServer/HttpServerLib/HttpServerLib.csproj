@@ -41,7 +41,8 @@
   <ItemGroup>
     <Compile Include="ActionResult.cs" />
     <Compile Include="BaseHeader.cs" />
-    <Compile Include="RequestHeaderFields.cs" />
+    <Compile Include="HeadersHelper.cs" />
+    <Compile Include="RequestHeaders.cs" />
     <Compile Include="HttpRequest.cs" />
     <Compile Include="HttpResponse.cs" />
     <Compile Include="HttpServer.cs" />
@@ -50,7 +51,7 @@
     <Compile Include="IServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocols.cs" />
-    <Compile Include="ResponseHeaderFields.cs" />
+    <Compile Include="ResponseHeaders.cs" />
     <Compile Include="ResponseHelper.cs" />
     <Compile Include="RouteAttribute.cs" />
     <Compile Include="RouteMethod.cs" />
