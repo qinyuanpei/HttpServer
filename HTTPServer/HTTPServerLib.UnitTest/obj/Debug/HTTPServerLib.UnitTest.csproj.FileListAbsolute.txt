@@ -1,0 +1,5 @@
+D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\bin\Debug\HttpServerLib.UnitTest.dll
+D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\bin\Debug\HttpServerLib.UnitTest.pdb
+D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HTTPServerLib.UnitTest.csprojResolveAssemblyReference.cache
+D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.dll
+D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.pdb

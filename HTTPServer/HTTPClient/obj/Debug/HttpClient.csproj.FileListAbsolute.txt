@@ -1,0 +1,5 @@
+D:\项目管理\Github\HttpServer\HTTPServer\HttpClient\bin\Debug\HttpClient.exe.config
+D:\项目管理\Github\HttpServer\HTTPServer\HttpClient\bin\Debug\HttpClient.exe
+D:\项目管理\Github\HttpServer\HTTPServer\HttpClient\bin\Debug\HttpClient.pdb
+D:\项目管理\Github\HttpServer\HTTPServer\HttpClient\obj\Debug\HttpClient.exe
+D:\项目管理\Github\HttpServer\HTTPServer\HttpClient\obj\Debug\HttpClient.pdb
