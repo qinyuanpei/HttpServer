@@ -7,3 +7,4 @@ D:\Projects\Github\HttpServer\HTTPServer\HttpServerLib\bin\Debug\HttpServerLib.d
 D:\Projects\Github\HttpServer\HTTPServer\HttpServerLib\bin\Debug\HttpServerLib.pdb
 D:\Projects\Github\HttpServer\HTTPServer\HttpServerLib\obj\Debug\HttpServerLib.dll
 D:\Projects\Github\HttpServer\HTTPServer\HttpServerLib\obj\Debug\HttpServerLib.pdb
+D:\Projects\Github\HttpServer\HTTPServer\HttpServerLib\obj\Debug\HttpServerLib.csprojResolveAssemblyReference.cache

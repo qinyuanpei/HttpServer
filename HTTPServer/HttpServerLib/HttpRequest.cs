@@ -51,9 +51,12 @@ namespace HTTPServerLib
             var rows = Regex.Split(data, Environment.NewLine);
 
             //Request URL & Method & Version
-            var first = Regex.Split(rows[0], @"(\s+)");
+            var first = Regex.Split(rows[0], @"(\s+)")
+                .Where(e => e.Trim() != string.Empty)
+                .ToArray();
             if (first.Length > 0) this.Method = first[0];
-            if (first.Length > 1) this.URL = Uri.UnescapeDataString(first[1]);
+            if (first.Length > 1) this.URL = Uri.UnescapeDataString(first[1]).Split('?')[0];
+            if (first.Length > 2) this.ProtocolVersion = first[2];
 
             //Request Headers
             this.Headers = GetRequestHeaders(rows);
@@ -109,7 +112,7 @@ namespace HTTPServerLib
         {
             var target = rows.Select((v, i) => new { Value = v, Index = i }).FirstOrDefault(e => e.Value.Trim() == string.Empty);
             if (target == null) return null;
-            var range = Enumerable.Range(target.Index + 1, rows.Count() - target.Index);
+            var range = Enumerable.Range(target.Index + 1, rows.Count() - target.Index - 1);
             return string.Join(Environment.NewLine, range.Select(e => rows.ElementAt(e)).ToArray());
         }
 
@@ -128,7 +131,8 @@ namespace HTTPServerLib
             if (string.IsNullOrEmpty(row)) return null;
             var kvs = Regex.Split(row, "&");
             if (kvs == null || kvs.Count() <= 0) return null;
-            return kvs.ToDictionary(e => Regex.Split(e, "==")[0], e => Regex.Split(e, "==")[1]);
+
+            return kvs.ToDictionary(e => Regex.Split(e, "=")[0], e => Regex.Split(e, "=")[1]);
         }
     }
 }
