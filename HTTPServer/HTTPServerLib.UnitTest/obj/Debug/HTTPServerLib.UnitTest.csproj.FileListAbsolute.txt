@@ -3,3 +3,8 @@ D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\bin\Debug\Ht
 D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HTTPServerLib.UnitTest.csprojResolveAssemblyReference.cache
 D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.dll
 D:\项目管理\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.pdb
+D:\Projects\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\bin\Debug\HttpServerLib.UnitTest.dll
+D:\Projects\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\bin\Debug\HttpServerLib.UnitTest.pdb
+D:\Projects\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.csprojResolveAssemblyReference.cache
+D:\Projects\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.dll
+D:\Projects\Github\HttpServer\HTTPServer\HTTPServerLib.UnitTest\obj\Debug\HttpServerLib.UnitTest.pdb

@@ -128,7 +128,7 @@ namespace HTTPServerLib
 
             //创建服务端Socket
             this.serverListener = new TcpListener(IPAddress.Parse(ServerIP), ServerPort);
-            this.Protocol = serverCertificate == null ? Protocols.Http : Protocols.Http;
+            this.Protocol = serverCertificate == null ? Protocols.Http : Protocols.Https;
             this.IsRunning = true;
             this.serverListener.Start();
             this.Log(string.Format("Sever is running at {0}://{1}:{2}", Protocol.ToString().ToLower(), ServerIP, ServerPort));

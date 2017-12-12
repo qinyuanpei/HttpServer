@@ -84,12 +84,12 @@ namespace HTTPServerLib
 
         public string GetHeader(RequestHeaders header)
         {
-            return GetHeader<RequestHeaders>(header);
+            return GetHeader(header);
         }
 
         public void SetHeader(RequestHeaders header, string value)
         {
-            SetHeader<RequestHeaders>(header, value);
+            SetHeader(header, value);
         }
 
         private string GetRequestData(Stream stream)

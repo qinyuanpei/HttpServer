@@ -34,7 +34,7 @@ namespace HttpServer
             response.Content_Encoding = "utf-8";
             response.StatusCode = "200";
             response.Content_Type = "text/html; charset=UTF-8";
-            response.Server = "ExampleServer";
+            response.Headers["Server"] = "ExampleServer";
 
             //发送响应
             response.Send();

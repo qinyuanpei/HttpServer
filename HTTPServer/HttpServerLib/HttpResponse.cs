@@ -48,12 +48,12 @@ namespace HTTPServerLib
 
         public string GetHeader(ResponseHeaders header)
         {
-            return GetHeader<ResponseHeaders>(header);
+            return GetHeader(header);
         }
 
         public void SetHeader(ResponseHeaders header, string value)
         {
-            SetHeader<ResponseHeaders>(header, value);
+            SetHeader(header, value);
         }
 
         /// <summary>

@@ -22,7 +22,10 @@ namespace HTTPServerLib
 
         public Dictionary<string, string> Headers { get; set; }
 
-        protected string GetHeader<THeader>(THeader header) where THeader : Enum
+        /// <summary>
+        /// 不支持枚举类型约束，所以采取下列方案:)
+        /// </summary>
+        protected string GetHeader(Enum header)
         {
             var fieldName = header.GetDescription();
             if (fieldName == null) return null;
@@ -31,7 +34,10 @@ namespace HTTPServerLib
             return Headers[fieldName];
         }
 
-        protected void SetHeader<THeader>(THeader header, string value) where THeader : Enum
+        /// <summary>
+        /// 不支持枚举类型约束，所以采取下列方案:)
+        /// </summary>
+        protected void SetHeader(Enum header, string value)
         {
             var fieldName = header.GetDescription();
             if (fieldName == null) return;
