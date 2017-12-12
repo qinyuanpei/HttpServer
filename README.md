@@ -1,10 +1,10 @@
 # HttpServer
 一个使用C#编写的简易Web服务器, 目前支持：
-* 静态页面处理
-* GET/POST请求
-* 支持HTTPS协议
-* 支持返回JSON(**Todo**)
-* 支持路由方法(**Todo**)
+* 静态页面处理 :smile:
+* GET/POST请求 :smile:
+* 支持HTTPS协议 :smile:
+* 支持返回JSON :worried:
+* 支持路由方法 :worried:
 
 # 快速开始
 
