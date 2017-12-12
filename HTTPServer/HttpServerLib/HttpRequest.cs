@@ -47,7 +47,6 @@ namespace HTTPServerLib
         public HttpRequest(Stream stream)
         {
             this.handler = stream;
-
             var data = GetRequestData(handler);
             var rows = Regex.Split(data, Environment.NewLine);
 
