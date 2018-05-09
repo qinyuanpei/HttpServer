@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace HTTPServerLib
 {
-    //基本日志接口
     public interface ILogger
     {
         void Log(object message);
