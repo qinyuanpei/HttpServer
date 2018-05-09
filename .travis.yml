@@ -13,7 +13,6 @@ notifications:
 
 install:
   - nuget restore ./HTTPServer/HTTPServer.sln
-  - nuget install-package NUnit.Runners -Version 3.8.0
 
 script:
   - cd ./HTTPServer
