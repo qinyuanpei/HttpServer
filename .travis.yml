@@ -1,0 +1,22 @@
+language: csharp
+solution: ./HTTPServer/HTTPServer.sln
+mono: 
+  - latest
+
+notifications:
+  email:
+    recipients:
+      - 875974254@qq.com
+      - qinyuanpei@163.com
+    on_success: change # default: change
+    on_failure: always # default: always
+
+install:
+  - nuget restore solution-name.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+
+script:
+  - cd ./HTTPServer/
+  - xbuild /p:Configuration=Release solution-name.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
+
