@@ -48,12 +48,22 @@ namespace HTTPServerLib
 
         public string GetHeader(ResponseHeaders header)
         {
-            return GetHeader(header);
+            return GetHeaderByKey(header);
+        }
+
+        public string GetHeader(string fieldName)
+        {
+            return GetHeaderByKey(fieldName);
         }
 
         public void SetHeader(ResponseHeaders header, string value)
         {
-            SetHeader(header, value);
+            SetHeaderByKey(header, value);
+        }
+
+        public void SetHeader(string fieldName, string value)
+        {
+            SetHeaderByKey(fieldName, value);
         }
 
         /// <summary>
@@ -95,7 +105,7 @@ namespace HTTPServerLib
             }
             catch (Exception e)
             {
-
+                Log(e.Message);
             }
             finally
             {
