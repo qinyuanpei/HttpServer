@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Net;
 using System.Text;
 using System.IO;
@@ -9,10 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace HTTPServerLib.UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class HttpServerTest
     {
-        [TestMethod]
+        [Test]
         public void TestGet()
         {
             var request = (HttpWebRequest)WebRequest.Create("http://localhost:4050/");
@@ -21,7 +21,7 @@ namespace HTTPServerLib.UnitTest
             Assert.AreEqual("ExampleServer", response.Headers["Server"]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestPost()
         {
             var request = (HttpWebRequest)WebRequest.Create("http://localhost:4050/");

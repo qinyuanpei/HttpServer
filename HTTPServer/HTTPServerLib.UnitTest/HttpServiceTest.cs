@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace HttpServerLib.UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class HttpServiceTest
     {
         
-        [TestMethod]
+        [Test]
         public void TestGet()
         {
             
         }
 
-        [TestMethod]
+        [Test]
         public void TestPost()
         {
 

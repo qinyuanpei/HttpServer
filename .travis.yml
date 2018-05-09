@@ -13,10 +13,14 @@ notifications:
 
 install:
   - nuget restore ./HTTPServer/HTTPServer.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory TestRunner
 
 script:
-  - cd ./HTTPServer/
+  - cd ./HTTPServer
   - xbuild /p:Configuration=Release HTTPServer.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
+  - mono ./testrunner/NUnit.Runners.3.8.0/tools/nunit-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
+
+branches:
+  only:
+    - master
 
