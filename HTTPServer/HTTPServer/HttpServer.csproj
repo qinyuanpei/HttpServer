@@ -52,7 +52,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HttpServerLib\HttpServerLib.csproj">
+    <ProjectReference Include="..\HTTPServerLib\HttpServerLib.csproj">
       <Project>{c2310e13-8d59-4632-bf91-203bff2ffe4f}</Project>
       <Name>HttpServerLib</Name>
     </ProjectReference>
