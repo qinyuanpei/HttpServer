@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServer", "HTTPServer\HttpServer.csproj", "{E6E5FC8E-8B94-4F1E-91BB-750B40ACB96E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServerLib", "HttpServerLib\HttpServerLib.csproj", "{C2310E13-8D59-4632-BF91-203BFF2FFE4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServerLib", "HTTPServerLib\HttpServerLib.csproj", "{C2310E13-8D59-4632-BF91-203BFF2FFE4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServerLib.UnitTest", "HTTPServerLib.UnitTest\HttpServerLib.UnitTest.csproj", "{31021B42-4303-4358-9EE2-60B1A0215AC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClient", "HttpClient\HttpClient.csproj", "{B2A1D446-92CE-455C-9194-36C8EF225D9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClient", "HTTPClient\HttpClient.csproj", "{B2A1D446-92CE-455C-9194-36C8EF225D9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
