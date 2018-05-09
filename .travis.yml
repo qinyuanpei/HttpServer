@@ -18,6 +18,10 @@ install:
 script:
   - cd ./HTTPServer
   - xbuild /p:Configuration=Release HTTPServer.sln
+  - xbuild /p:Configuration=Release ./HTTPClient/HttpClient.csproj
+  - xbuild /p:Configuration=Release ./HTTPServer/HttpServer.csproj
+  - xbuild /p:Configuration=Release ./HTTPServerLib/HttpServerLib.csproj
+  - xbuild /p:Configuration=Release ./HTTPServerLib.UnitTest/HttpServerLib.UnitTest.csproj
   - mono ./testrunner/NUnit.Runners.3.8.0/tools/nunit-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
 
 branches:
