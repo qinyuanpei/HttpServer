@@ -13,12 +13,12 @@ notifications:
 
 install:
   - nuget restore ./HTTPServer/HTTPServer.sln
-  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory TestRunner
+  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
 
 script:
   - cd ./HTTPServer
   - msbuild /p:Configuration=Release HTTPServer.sln
-  - mono ./testrunner/NUnit.Runners.3.8.0/tools/nunit-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
+  - mono ./TestRunner/NUnit.Runners.3.8.0/tools/nunit-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
 
 branches:
   only:
