@@ -25,7 +25,7 @@ namespace HTTPServerLib
         /// <summary>
         /// 不支持枚举类型约束，所以采取下列方案:)
         /// </summary>
-        protected string GetHeader(Enum header)
+        protected string GetHeaderByKey(Enum header)
         {
             var fieldName = header.GetDescription();
             if (fieldName == null) return null;
@@ -34,13 +34,29 @@ namespace HTTPServerLib
             return Headers[fieldName];
         }
 
+        protected string GetHeaderByKey(string fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldName)) return null;
+            var hasKey = Headers.ContainsKey(fieldName);
+            if (!hasKey) return null;
+            return Headers[fieldName];
+        }
+
         /// <summary>
         /// 不支持枚举类型约束，所以采取下列方案:)
         /// </summary>
-        protected void SetHeader(Enum header, string value)
+        protected void SetHeaderByKey(Enum header, string value)
         {
             var fieldName = header.GetDescription();
             if (fieldName == null) return;
+            var hasKey = Headers.ContainsKey(fieldName);
+            if (!hasKey) Headers.Add(fieldName, value);
+            Headers[fieldName] = value;
+        }
+
+        protected void SetHeaderByKey(string fieldName, string value)
+        {
+            if (string.IsNullOrEmpty(fieldName)) return;
             var hasKey = Headers.ContainsKey(fieldName);
             if (!hasKey) Headers.Add(fieldName, value);
             Headers[fieldName] = value;
