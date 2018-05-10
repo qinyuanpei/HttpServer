@@ -1,4 +1,7 @@
 # HttpServer
+[![Build Status](https://www.travis-ci.org/qinyuanpei/HttpServer.svg?branch=master)](https://www.travis-ci.org/qinyuanpei/HttpServer)
+![Sonar-HttpServer](https://sonarcloud.io/api/project_badges/quality_gate?project=Sonar-HttpServer)
+
 一个使用C#编写的简易Web服务器, 目前支持：
 * 静态页面处理 :smile:
 * GET/POST请求 :smile:
