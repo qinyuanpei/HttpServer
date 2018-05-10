@@ -1,5 +1,8 @@
+jdk:
+  - oraclejdk8
 mono: 
   - latest
+
 language: csharp
 solution: ./HTTPServer/HTTPServer.sln
 
@@ -19,8 +22,18 @@ install:
 script:
   - msbuild /p:Configuration=Release HTTPServer.sln
   - mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
+  - sonar-scanner
 
 branches:
   only:
     - master
+
+addons:
+  sonarcloud:
+    organization: "sonarcloud_organization_key" 
+    token: ${SONAR_TOKEN}
+    
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
 
