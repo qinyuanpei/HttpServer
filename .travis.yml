@@ -1,7 +1,7 @@
-language: csharp
-solution: ./HTTPServer/HTTPServer.sln
 mono: 
   - latest
+language: csharp
+solution: ./HTTPServer/HTTPServer.sln
 
 notifications:
   email:
@@ -12,12 +12,14 @@ notifications:
     on_failure: always # default: always
 
 install:
-  - nuget restore ./HTTPServer/HTTPServer.sln
+  - nuget restore ./HTTPServer/HTTPServer.sln # restore nuget
+  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner # install nunit
 
 script:
+  - nuget
   - cd ./HTTPServer
   - msbuild /p:Configuration=Release HTTPServer.sln
-  - mono ./packages/NUnit.Runners.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
+  - mono ./TestRunner/NUnit.Runners.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
 
 branches:
   only:
