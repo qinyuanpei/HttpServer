@@ -16,7 +16,6 @@ install:
   - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner # install nunit
 
 script:
-  - nuget
   - cd ./HTTPServer
   - msbuild /p:Configuration=Release HTTPServer.sln
   - mono ./TestRunner/NUnit.Runners.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
