@@ -30,7 +30,7 @@ branches:
 
 addons:
   sonarcloud:
-    organization: "sonarcloud_organization_key" 
+    organization: "qinyuanpei-github" 
     token: ${SONAR_TOKEN}
     
 cache:
