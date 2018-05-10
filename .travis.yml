@@ -18,7 +18,7 @@ install:
 
 script:
   - msbuild /p:Configuration=Release HTTPServer.sln
-  - mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
+  - mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
 
 branches:
   only:
