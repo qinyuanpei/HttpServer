@@ -12,12 +12,11 @@ notifications:
     on_failure: always # default: always
 
 install:
-  - nuget restore ./HTTPServer/HTTPServer.sln # restore nuget
+  - cd ./HTTPServer
+  - nuget restore ./HTTPServer.sln # restore nuget
   - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner # install nunit
-  - ls ./TestRunner
 
 script:
-  - cd ./HTTPServer
   - msbuild /p:Configuration=Release HTTPServer.sln
   - mono ./TestRunner/NUnit.Runners.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HTTPServerLib.UnitTest.dll
 
