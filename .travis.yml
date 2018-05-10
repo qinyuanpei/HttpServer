@@ -31,7 +31,7 @@ branches:
 addons:
   sonarcloud:
     organization: "qinyuanpei-github" 
-    token: ${SONAR_TOKEN}
+    token: $SONAR_TOKEN
     
 cache:
   directories:
