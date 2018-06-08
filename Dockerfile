@@ -31,5 +31,6 @@ RUN sudo wget https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe
 # RUN mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe <UnitTest.dll>
 RUN git clone https://github.com/qinyuanpei/HttpServer.git
 RUN cd ./HttpServer/
+RUN ls
 RUN msbuild /p:Configuration=Release ./HTTPServer/HTTPServer.sln
 EXPOSE 2048
