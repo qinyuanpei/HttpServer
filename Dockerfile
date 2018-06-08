@@ -11,6 +11,7 @@ RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-trusty main" 
 RUN sudo apt-get update
 RUN sudo apt-get install aptitude -y
 RUN sudo apt-get install -f
+RUN sudo apt-get install -y git
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
@@ -28,7 +29,6 @@ RUN sudo wget https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe
 # Unit Test
 # RUN mono nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
 # RUN mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe <UnitTest.dll>
-
-ADD / ./
-RUN msbuild ./HttpServer/HTTPServer.sln
+RUN cd ./HttpServer
+RUN msbuild ./HTTPServer/HTTPServer.sln
 EXPOSE 2048

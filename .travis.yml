@@ -17,11 +17,11 @@ notifications:
 install:
   - cd ./HTTPServer
   - nuget restore ./HTTPServer.sln # restore nuget
-  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner # install nunit
+#  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner # install nunit
 
 script:
   - msbuild /p:Configuration=Release HTTPServer.sln
-  - mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
+#  - mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
   - sonar-scanner -Dsonar.verbose=true -X
 
 branches:
