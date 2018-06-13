@@ -26,7 +26,7 @@ RUN sudo unzip sonar-scanner.zip
 RUN alias sonar-scanner="mono ./sonar-scanner/SonarQube.Scanner.MSBuild.exe"
 
 # Install NUnit
-RUN nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
+RUN mono nuget.exe install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
 RUN alias nunit="mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe"
 
 # Build Project && Sonar Analyse && UnitTest
