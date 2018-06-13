@@ -15,11 +15,11 @@ RUN sudo apt-get install -y git
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
-RUN sudo wget https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe nuget.exe
+RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe 
 RUN alias nuget="mono nuget.exe"
 
 # Install Sonar-Scanner
-RUN sudo wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip sonar-scanner.zip
+RUN sudo wget -O sonar-scanner.zip https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip
 RUN sudo unzip sonar-scanner.zip
 RUN sudo alias sonar-scanner="mono ./sonar-scanner/SonarQube.Scanner.MSBuild.exe"
 
