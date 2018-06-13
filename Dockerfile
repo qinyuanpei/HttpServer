@@ -23,7 +23,7 @@ RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nug
 # Install Sonar-Scanner
 RUN sudo wget -O sonar-scanner.zip https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip
 RUN sudo unzip sonar-scanner.zip -d ./sonar-scanner
-#RUN alias sonar-scanner="mono .SonarQube.Scanner.MSBuild.exe"
+#RUN alias sonar-scanner="mono .SonarScanner.MSBuild.exe"
 
 # Install NUnit
 RUN mono nuget.exe install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
@@ -31,8 +31,8 @@ RUN mono nuget.exe install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestR
 
 # Build Project && Sonar Analyse && UnitTest
 RUN git clone https://github.com/qinyuanpei/HttpServer.git
-RUN sudo mono ./sonar-scanner/SonarQube.Scanner.MSBuild.exe begin /k:"Sonar-HttpServer" /d:sonar.organization="qinyuanpei-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
+# RUN sudo mono ./sonar-scanner/SonarScanner.MSBuild.exe begin /k:"Sonar-HttpServer" /d:sonar.organization="qinyuanpei-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
 RUN msbuild /p:Configuration=Release ./HttpServer/HTTPServer/HTTPServer.sln
-RUN sudo mono ./sonar-scanner/SonarQube.Scanner.MSBuild.exe end /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
+# RUN sudo mono ./sonar-scanner/SonarScanner.MSBuild.exe end /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
 # RUN mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./HttpServer/HTTPServer/HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
 EXPOSE 2048
