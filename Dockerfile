@@ -14,6 +14,7 @@ RUN sudo apt-get install -f
 RUN sudo apt-get install -y git
 RUN sudo apt-get install -y zip
 RUN sudo apt-get install -y unzip
+RUN sudo aptitude install -y oracle-java8-installer
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
@@ -21,7 +22,7 @@ RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nug
 #RUN alias nuget="mono nuget.exe"
 
 # Install Sonar-Scanner
-RUN sudo wget -O sonar-scanner.zip https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip
+RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227.zip
 RUN sudo unzip sonar-scanner.zip -d ./sonar-scanner
 #RUN alias sonar-scanner="mono .SonarScanner.MSBuild.exe"
 
