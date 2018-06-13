@@ -15,22 +15,22 @@ RUN sudo apt-get install -y git
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
-RUN sudo wget https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe
+RUN sudo wget https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe nuget.exe
+RUN alias nuget="mono nuget.exe"
 
-# Build Project
-# RUN msbuild -help
-# RUN monn nuget restore <Solution File>
-# RUN msbuild /p:Configuration=Release <Solution File> or <MSBuild Script File>
+# Install Sonar-Scanner
+RUN sudo wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip sonar-scanner.zip
+RUN sudo unzip sonar-scanner.zip
+RUN sudo alias sonar-scanner="mono ./sonar-scanner/SonarQube.Scanner.MSBuild.exe"
 
-# Sonar Analyse
-# Prepare sonar-project.properties file && Sounar-Runner so that Sonar can submit analyse result to backend.
-# RUN wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-netcoreapp2.0.zip
-# RUN wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip
-# RUN sonnar-scanner
+# Install NUnit
+RUN nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
+RUN alias nunit="mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe"
 
-# Unit Test
-# RUN mono nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
-# RUN mono ./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe <UnitTest.dll>
+# Build Project && Sonar Analyse && UnitTest
 RUN git clone https://github.com/qinyuanpei/HttpServer.git
+RUN sonar-scanner begin /k:"Sonar-HttpServer" /d:sonar.organization="qinyuanpei-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
 RUN msbuild /p:Configuration=Release ./HttpServer/HTTPServer/HTTPServer.sln
+RUN sonar-scanner end /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
+RUN nunit ./HttpServer/HTTPServer/HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
 EXPOSE 2048
