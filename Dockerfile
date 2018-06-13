@@ -23,6 +23,7 @@ RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nug
 # Install Sonar-Scanner
 RUN sudo wget -O sonar-scanner.zip https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.3.0.1333/sonar-scanner-msbuild-4.3.0.1333-net46.zip
 RUN sudo unzip sonar-scanner.zip
+RUN ls
 #RUN alias sonar-scanner="mono ./sonar-scanner/SonarQube.Scanner.MSBuild.exe"
 
 # Install NUnit
