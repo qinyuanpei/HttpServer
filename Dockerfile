@@ -12,6 +12,8 @@ RUN sudo apt-get update
 RUN sudo apt-get install aptitude -y
 RUN sudo apt-get install -f
 RUN sudo apt-get install -y git
+RUN sudo apt-get install -y zip
+RUN sudo apt-get install -y unzip
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
