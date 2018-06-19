@@ -16,6 +16,7 @@ RUN sudo apt-get install -y zip
 RUN sudo apt-get install -y unzip
 RUN sudo aptitude install -y oracle-java8-installer
 RUN sudo aptitude install -y mono-complete
+RUN alias -p
 
 # Intall Nuget
 RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe 
