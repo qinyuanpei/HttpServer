@@ -19,7 +19,7 @@ RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
 RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe 
-RUN export nuget="./nuget.exe"
+RUN export NUGET_PATH="./nuget.exe"
 
 # Install Sonar-Scanner
 RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227.zip
@@ -32,6 +32,7 @@ RUN export nunit="./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.ex
 
 # Build Project && Sonar Analyse && UnitTest
 RUN git clone https://github.com/qinyuanpei/HttpServer.git
+RUN ./sonarscanner/bin/sonar-scanner -v
 RUN ./sonarscanner/bin/sonar-scanner -D sonar.host.url="https://sonarcloud.io" -D sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
 RUN msbuild /p:Configuration=Release ./HttpServer/HTTPServer/HTTPServer.sln
 RUN mono nunit ./HttpServer/HTTPServer/HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
