@@ -17,6 +17,7 @@ RUN sudo apt-get install -y unzip
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
+RUN sudo mkdir /usr/nuget/
 RUN sudo wget -O /usr/nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe 
 ENV NUGET="/usr/nuget/nuget.exe"
 
