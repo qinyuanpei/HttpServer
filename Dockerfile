@@ -24,7 +24,7 @@ ENV NUGET="/usr/nuget/nuget.exe"
 # Install Sonar-Scanner
 RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
 RUN sudo unzip sonar-scanner.zip -d /usr/
-RUN sudo chmod -R 777 ./sonar-scanner-3.2.0.1227-linux/
+RUN sudo chmod -R 777 usr/sonar-scanner-3.2.0.1227-linux
 ENV SONAR_SCANNER="usr/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"
 
 # Install NUnit
@@ -34,8 +34,8 @@ ENV NUNIT="./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe"
 # Build Project && Sonar Analyse && UnitTest
 RUN sudo mkdir ./WorkSpace/
 RUN cd ./WorkSpace/
+RUN sudo chmod -R 777 ./WorkSpace/
 RUN git clone https://github.com/qinyuanpei/HttpServer.git 
-RUN sudo chmod -R 777 ./HttpServer/
 RUN cd ./HttpServer/
 RUN sudo ${SONAR_SCANNER} -D sonar.host.url="https://sonarcloud.io" -D sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9" -D sonar.projectKey="Sonar-HttpServer" -D sonar.sources=".\HttpServer"
 RUN msbuild /p:Configuration=Release ./HTTPServer/HTTPServer.sln
