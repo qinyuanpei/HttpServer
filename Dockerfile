@@ -17,23 +17,26 @@ RUN sudo apt-get install -y unzip
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
-RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe 
-RUN export NUGET_PATH="./nuget.exe"
+RUN sudo wget -O /usr/nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nuget.exe 
+ENV NUGET="/usr/nuget/nuget.exe"
 
 # Install Sonar-Scanner
 RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
-RUN sudo unzip sonar-scanner.zip -d ./
+RUN sudo unzip sonar-scanner.zip -d /usr/
 RUN sudo chmod -R 777 ./sonar-scanner-3.2.0.1227-linux/
-RUN export sonar_scanner="./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"
+ENV SONAR_SCANNER="usr/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"
 
 # Install NUnit
-RUN mono ./nuget.exe install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
-RUN export nunit="./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe"
+RUN mono ${NUGET} install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
+ENV NUNIT="./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe"
 
 # Build Project && Sonar Analyse && UnitTest
-RUN git clone https://github.com/qinyuanpei/HttpServer.git
+RUN sudo mkdir ./WorkSpace/
+RUN cd ./WorkSpace/
+RUN git clone https://github.com/qinyuanpei/HttpServer.git 
 RUN sudo chmod -R 777 ./HttpServer/
-RUN sudo ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -D sonar.host.url="https://sonarcloud.io" -D sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
-RUN msbuild /p:Configuration=Release ./HttpServer/HTTPServer/HTTPServer.sln
-RUN mono nunit ./HttpServer/HTTPServer/HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
+RUN cd ./HttpServer/
+RUN sudo ${SONAR_SCANNER} -D sonar.host.url="https://sonarcloud.io" -D sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9" -D sonar.projectKey="Sonar-HttpServer" -D sonar.sources=".\HttpServer"
+RUN msbuild /p:Configuration=Release ./HTTPServer/HTTPServer.sln
+RUN mono ${NUNIT} ./HTTPServer/HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
 EXPOSE 2048
