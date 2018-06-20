@@ -32,7 +32,8 @@ RUN export nunit="./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.ex
 
 # Build Project && Sonar Analyse && UnitTest
 RUN git clone https://github.com/qinyuanpei/HttpServer.git
-RUN sudo sh ./sonarscanner/bin/sonar-scanner -D sonar.host.url="https://sonarcloud.io" /d:sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
+RUN ls
+RUN sudo ./sonarscanner/bin/sonar-scanner -D sonar.host.url="https://sonarcloud.io" -D sonar.login="db795a28468dc7c12805b330afed53d362fdd2d9"
 RUN msbuild /p:Configuration=Release ./HttpServer/HTTPServer/HTTPServer.sln
 RUN mono nunit ./HttpServer/HTTPServer/HTTPServerLib.UnitTest/bin/Release/HttpServerLib.UnitTest.dll
 EXPOSE 2048
