@@ -24,6 +24,7 @@ RUN export NUGET_PATH="./nuget.exe"
 # Install Sonar-Scanner
 RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227.zip
 RUN sudo unzip sonar-scanner.zip -d ./
+RUN sudo chmod +x ./sonar-scanner-3.2.0.1227/bin/sonar-scanner
 RUN export sonar_scanner="./sonar-scanner-3.2.0.1227/bin/sonar-scanner"
 
 # Install NUnit
