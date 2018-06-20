@@ -27,7 +27,7 @@ RUN sudo unzip sonar-scanner.zip -d ./sonarscanner
 RUN export sonar_scanner="./sonarscanner/bin/sonar-scanner"
 
 # Install NUnit
-RUN mono nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
+RUN mono ./nuget.exe install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
 RUN export nunit="./TestRunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe"
 
 # Build Project && Sonar Analyse && UnitTest
