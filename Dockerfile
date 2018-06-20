@@ -14,7 +14,6 @@ RUN sudo apt-get install -f
 RUN sudo apt-get install -y git
 RUN sudo apt-get install -y zip
 RUN sudo apt-get install -y unzip
-RUN sudo aptitude install -y oracle-java8-installer
 RUN sudo aptitude install -y mono-complete
 
 # Intall Nuget
@@ -22,10 +21,10 @@ RUN sudo wget -O nuget.exe https://dist.nuget.org/win-x86-commandline/v4.6.2/nug
 RUN export NUGET_PATH="./nuget.exe"
 
 # Install Sonar-Scanner
-RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227.zip
+RUN sudo wget -O sonar-scanner.zip https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
 RUN sudo unzip sonar-scanner.zip -d ./
-RUN sudo chmod -R 777 ./sonar-scanner-3.2.0.1227/
-RUN export sonar_scanner="./sonar-scanner-3.2.0.1227/bin/sonar-scanner"
+RUN sudo chmod -R 777 ./sonar-scanner-cli-3.2.0.1227-linux/
+RUN export sonar_scanner="./sonar-scanner-cli-3.2.0.1227-linux/bin/sonar-scanner"
 
 # Install NUnit
 RUN mono ./nuget.exe install NUnit.Runners -Version 3.8.0 -OutputDirectory ./TestRunner
