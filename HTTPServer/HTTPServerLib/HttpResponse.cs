@@ -24,6 +24,7 @@ namespace HTTPServerLib
         public HttpResponse(Stream stream)
         {
             this.handler = stream;
+            this.Headers = new Dictionary<string, string>();
         }
 
         public HttpResponse SetContent(byte[] content, Encoding encoding = null)
