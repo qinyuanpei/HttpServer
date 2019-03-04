@@ -55,7 +55,7 @@ namespace HTTPServerLib
                 .Where(e => e.Trim() != string.Empty)
                 .ToArray();
             if (first.Length > 0) this.Method = first[0];
-            if (first.Length > 1) this.URL = Uri.UnescapeDataString(first[1]).Split('?')[0];
+            if (first.Length > 1) this.URL = Uri.UnescapeDataString(first[1]);
             if (first.Length > 2) this.ProtocolVersion = first[2];
 
             //Request Headers
