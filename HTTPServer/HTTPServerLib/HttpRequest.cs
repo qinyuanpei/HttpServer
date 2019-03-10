@@ -65,8 +65,8 @@ namespace HTTPServerLib
             if (this.Method == "GET")
             {
                 this.Body = GetRequestBody(rows);
-                var isUrlencoded = this.URL.Contains('?');
-                if (isUrlencoded) this.Params = GetRequestParameters(URL.Split('?')[1]);
+                var isUrlencoded = first[1].Contains('?');
+                if (isUrlencoded) this.Params = GetRequestParameters(first[1].Split('?')[1]);
             }
 
             //Request "POST"
