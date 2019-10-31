@@ -61,10 +61,21 @@ namespace HTTPServerLib
             //Request Headers
             this.Headers = GetRequestHeaders(rows);
 
+            //Request Body
+            Body = GetRequestBody(rows);
+            var contentLength = GetHeader(RequestHeaders.ContentLength);
+            if (int.TryParse(contentLength, out var length) && Body.Length != length)
+            {
+                do
+                {
+                    length = stream.Read(bytes, 0, MAX_SIZE - 1);
+                    Body += Encoding.UTF8.GetString(bytes, 0, length);
+                } while (Body.Length != length);
+            }
+
             //Request "GET"
             if (this.Method == "GET")
             {
-                this.Body = GetRequestBody(rows);
                 var isUrlencoded = this.URL.Contains('?');
                 if (isUrlencoded) this.Params = GetRequestParameters(URL.Split('?')[1]);
             }
@@ -72,7 +83,6 @@ namespace HTTPServerLib
             //Request "POST"
             if (this.Method == "POST")
             {
-                this.Body = GetRequestBody(rows);
                 var contentType = GetHeader(RequestHeaders.ContentType);
                 var isUrlencoded = contentType == @"application/x-www-form-urlencoded";
                 if (isUrlencoded) this.Params = GetRequestParameters(this.Body);
