@@ -152,7 +152,7 @@ namespace HTTPServerLib
             var kvs = Regex.Split(row, "&");
             if (kvs == null || kvs.Count() <= 0) return null;
 
-            return kvs.ToDictionary(e => Regex.Split(e, "=")[0], e => Regex.Split(e, "=")[1]);
+            return kvs.ToDictionary(e => Regex.Split(e, "=")[0], e => { var p = Regex.Split(e, "="); return p.Length > 1 ? p[1] : ""; });
         }
     }
 }
